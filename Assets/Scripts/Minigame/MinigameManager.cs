@@ -112,6 +112,15 @@ public class MinigameManager : MonoBehaviour
             gain = 2;
         }
 
+        if (gain > 1)
+        {
+            AudioManager.Instance?.PlaySuccess();
+        }
+        else
+        {
+            AudioManager.Instance?.PlayError();
+        }
+
         if (Inventory.Instance != null)
         {
             Inventory.Instance.AddWood(gain);

@@ -25,6 +25,7 @@ public class Inventory : MonoBehaviour
     {
         woodCount += amount;
         OnWoodChanged?.Invoke(woodCount);
+        AudioManager.Instance?.PlayPickup();
     }
 
     public void RemoveWood(int amount)

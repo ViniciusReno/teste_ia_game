@@ -40,6 +40,7 @@ public class Storage : Interactable
         var quest = QuestManager.Instance.ActiveQuest;
         if (quest == null)
         {
+            AudioManager.Instance?.PlayError();
             return;
         }
 
@@ -47,6 +48,12 @@ public class Storage : Interactable
         {
             Inventory.Instance.RemoveWood(quest.woodRequired);
             villageProgress.AdvancePhase();
+            AudioManager.Instance?.PlaySuccess();
+            FXManager.Instance?.PlaySparkle(transform.position);
+        }
+        else
+        {
+            AudioManager.Instance?.PlayError();
         }
 
         if (deliverAllPanel != null)

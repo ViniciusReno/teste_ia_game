@@ -37,6 +37,7 @@ public class Tree : Interactable
 
         int attemptNumber = (data != null ? data.attempts : 0) - remainingAttempts + 1;
         MinigameManager.StartGame(attemptNumber);
+        FXManager.Instance?.PlayLeaves(transform.position);
         remainingAttempts--;
 
         if (remainingAttempts <= 0)
