@@ -48,6 +48,7 @@ public class VillageProgress : MonoBehaviour
         }
 
         currentPhaseIndex++;
+        FXManager.Instance?.PlaySparkle(transform.position);
 
         if (IsComplete)
         {
