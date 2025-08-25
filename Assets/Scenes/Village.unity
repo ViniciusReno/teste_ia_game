@@ -3,3 +3,36 @@
 --- !u!1 &1
 GameObject:
   m_Name: VillageRoot
+--- !u!1 &1000
+GameObject:
+  m_Name: Player
+  m_Component:
+  - component: {fileID: 1001}
+  - component: {fileID: 1002}
+  - component: {fileID: 1003}
+--- !u!50 &1001
+Rigidbody2D:
+  m_GameObject: {fileID: 1000}
+  gravityScale: 0
+--- !u!95 &1002
+Animator:
+  m_GameObject: {fileID: 1000}
+--- !u!114 &1003
+MonoBehaviour:
+  m_GameObject: {fileID: 1000}
+  m_Script: {fileID: 11500000, guid: 1bb652a118c9466996576a50206bd9d3, type: 3}
+--- !u!1 &2000
+GameObject:
+  m_Name: CM vcam
+  m_Component:
+  - component: {fileID: 2001}
+  - component: {fileID: 2002}
+--- !u!20 &2001
+Camera:
+  m_GameObject: {fileID: 2000}
+  orthographic: 1
+--- !u!114 &2002
+MonoBehaviour:
+  m_GameObject: {fileID: 2000}
+  m_Script: {fileID: 11500000, guid: 00000000000000000000000000000000, type: 3}
+  m_Follow: {fileID: 1000}
