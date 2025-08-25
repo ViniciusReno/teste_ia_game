@@ -35,7 +35,8 @@ public class Tree : Interactable
             return;
         }
 
-        MinigameManager.StartGame(this);
+        int attemptNumber = (data != null ? data.attempts : 0) - remainingAttempts + 1;
+        MinigameManager.StartGame(attemptNumber);
         remainingAttempts--;
 
         if (remainingAttempts <= 0)
