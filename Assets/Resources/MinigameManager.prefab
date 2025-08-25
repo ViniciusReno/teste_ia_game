@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1
+GameObject:
+  m_Name: MinigameManager
+  m_Component:
+  - component: {fileID: 2}
+  - component: {fileID: 3}
+  - component: {fileID: 4}
+--- !u!224 &2
+RectTransform:
+  m_GameObject: {fileID: 1}
+--- !u!223 &3
+Canvas:
+  m_GameObject: {fileID: 1}
+--- !u!114 &4
+MonoBehaviour:
+  m_GameObject: {fileID: 1}
+  m_Script: {fileID: 11500000, guid: 58368609f1904ae19d922926ae8efc12, type: 3}
+# UI elements are created by script at runtime
