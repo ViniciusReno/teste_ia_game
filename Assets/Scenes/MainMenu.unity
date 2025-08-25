@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1
+GameObject:
+  m_Name: MainMenuRoot
+  m_Component:
+  - component: {fileID: 2}
+--- !u!114 &2
+MonoBehaviour:
+  m_GameObject: {fileID: 1}
+  m_Script: {fileID: 11500000, guid: b5026841b50d4fe191b2b33fcf0f68a9, type: 3}
+  sceneName: Village
+# This scene should include a UI Button wired to call SceneLoader.LoadScene()
