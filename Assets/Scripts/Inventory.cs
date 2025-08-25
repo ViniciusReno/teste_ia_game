@@ -19,6 +19,9 @@ public class Inventory : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        var data = SaveSystem.LoadGame();
+        woodCount = data.woodCount;
     }
 
     public void AddWood(int amount)
@@ -32,5 +35,10 @@ public class Inventory : MonoBehaviour
     {
         woodCount = Mathf.Max(0, woodCount - amount);
         OnWoodChanged?.Invoke(woodCount);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveSystem.SaveGame();
     }
 }

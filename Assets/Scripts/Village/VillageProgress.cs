@@ -16,6 +16,14 @@ public class VillageProgress : MonoBehaviour
     private int currentPhaseIndex;
     private GameObject currentWell;
 
+    public int CurrentPhaseIndex => currentPhaseIndex;
+
+    private void Awake()
+    {
+        var data = SaveSystem.LoadGame();
+        currentPhaseIndex = data.wellPhase;
+    }
+
     private void Start()
     {
         SpawnPhase();
