@@ -14,6 +14,8 @@ public class QuestBoard : Interactable
 
     private int currentIndex;
 
+    public int CurrentIndex => currentIndex;
+
     private void Start()
     {
         // Provide a default cycle of quests if none were assigned via the inspector.
@@ -23,6 +25,9 @@ public class QuestBoard : Interactable
             questQueue.Add(CreateQuest(15));
             questQueue.Add(CreateQuest(20));
         }
+
+        var data = SaveSystem.LoadGame();
+        currentIndex = Mathf.Clamp(data.questIndex, 0, Mathf.Max(questQueue.Count - 1, 0));
     }
 
     private QuestSO CreateQuest(int wood)

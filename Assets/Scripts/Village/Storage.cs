@@ -50,6 +50,7 @@ public class Storage : Interactable
             villageProgress.AdvancePhase();
             AudioManager.Instance?.PlaySuccess();
             FXManager.Instance?.PlaySparkle(transform.position);
+            SaveSystem.SaveGame();
         }
         else
         {
