@@ -9,8 +9,10 @@ using Interaction;
 public class QuestBoard : Interactable
 {
     [SerializeField]
-    [Tooltip("Queue of quests offered by this board.")]
-    private List<QuestSO> questQueue = new List<QuestSO>();
+    [Tooltip("Wood requirements for the initial quest cycle.")]
+    private int[] initialSequence = { 10, 15, 20 };
+
+    private readonly List<QuestSO> questQueue = new List<QuestSO>();
 
     private int currentIndex;
 
@@ -18,12 +20,13 @@ public class QuestBoard : Interactable
 
     private void Start()
     {
-        // Provide a default cycle of quests if none were assigned via the inspector.
-        if (questQueue.Count == 0)
+        questQueue.Clear();
+        if (initialSequence != null)
         {
-            questQueue.Add(CreateQuest(10));
-            questQueue.Add(CreateQuest(15));
-            questQueue.Add(CreateQuest(20));
+            foreach (var wood in initialSequence)
+            {
+                questQueue.Add(CreateQuest(wood));
+            }
         }
 
         var data = SaveSystem.LoadGame();
@@ -43,7 +46,7 @@ public class QuestBoard : Interactable
     /// </summary>
     public override void Interact()
     {
-        if (QuestManager.Instance.ActiveQuest != null)
+        if (QuestManager.Instance.ActiveQuest != null || questQueue.Count == 0)
         {
             return;
         }

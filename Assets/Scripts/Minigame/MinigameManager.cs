@@ -7,9 +7,18 @@ using UnityEngine.UI;
 /// </summary>
 public class MinigameManager : MonoBehaviour
 {
-    private const float GoodWidth = 0.20f;
-    private const float PerfectWidth = 0.06f;
-    private const float BaseSpeed = 1f;
+    [SerializeField]
+    [Tooltip("Time in seconds for a full cycle of the indicator bar.")]
+    private float barPeriod = 1.2f;
+
+    [SerializeField, Range(0f, 1f)]
+    [Tooltip("Width of the 'good' zone as a percentage of the bar.")]
+    private float goodZonePercent = 0.20f;
+
+    [SerializeField, Range(0f, 1f)]
+    [Tooltip("Width of the 'perfect' zone as a percentage of the bar.")]
+    private float perfectZonePercent = 0.06f;
+
     private const float SpeedStep = 0.5f;
 
     [SerializeField] private RectTransform indicator;
@@ -39,13 +48,13 @@ public class MinigameManager : MonoBehaviour
             BuildUI();
         }
 
-        speed = BaseSpeed + (attempt - 1) * SpeedStep;
+        speed = (2f / barPeriod) + (attempt - 1) * SpeedStep;
 
-        goodZone.anchorMin = new Vector2(0.5f - GoodWidth / 2f, 0f);
-        goodZone.anchorMax = new Vector2(0.5f + GoodWidth / 2f, 1f);
+        goodZone.anchorMin = new Vector2(0.5f - goodZonePercent / 2f, 0f);
+        goodZone.anchorMax = new Vector2(0.5f + goodZonePercent / 2f, 1f);
 
-        perfectZone.anchorMin = new Vector2(0.5f - PerfectWidth / 2f, 0f);
-        perfectZone.anchorMax = new Vector2(0.5f + PerfectWidth / 2f, 1f);
+        perfectZone.anchorMin = new Vector2(0.5f - perfectZonePercent / 2f, 0f);
+        perfectZone.anchorMax = new Vector2(0.5f + perfectZonePercent / 2f, 1f);
     }
 
     private void BuildUI()
@@ -103,11 +112,11 @@ public class MinigameManager : MonoBehaviour
         resolved = true;
 
         int gain = 1;
-        if (pos >= 0.5f - PerfectWidth / 2f && pos <= 0.5f + PerfectWidth / 2f)
+        if (pos >= 0.5f - perfectZonePercent / 2f && pos <= 0.5f + perfectZonePercent / 2f)
         {
             gain = 3;
         }
-        else if (pos >= 0.5f - GoodWidth / 2f && pos <= 0.5f + GoodWidth / 2f)
+        else if (pos >= 0.5f - goodZonePercent / 2f && pos <= 0.5f + goodZonePercent / 2f)
         {
             gain = 2;
         }
