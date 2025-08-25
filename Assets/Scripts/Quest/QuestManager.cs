@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Handles the currently active quest and updates a small UI display.
@@ -15,8 +15,8 @@ public class QuestManager : MonoBehaviour
     public event Action<QuestSO> OnQuestAssigned;
 
     [SerializeField]
-    [Tooltip("UI text element used to display current quest info.")]
-    private Text questText;
+    [Tooltip("UI text element used to display current quest progress.")]
+    private TMP_Text questText;
 
     private void Awake()
     {
@@ -37,9 +37,10 @@ public class QuestManager : MonoBehaviour
     {
         ActiveQuest = quest;
         OnQuestAssigned?.Invoke(quest);
-        if (questText != null)
+        if (Inventory.Instance != null)
         {
-            questText.text = $"Gather {quest.woodRequired} wood";
+            Inventory.Instance.OnWoodChanged += UpdateQuestProgress;
+            UpdateQuestProgress(Inventory.Instance.woodCount);
         }
     }
 
@@ -49,9 +50,25 @@ public class QuestManager : MonoBehaviour
     public void ClearQuest()
     {
         ActiveQuest = null;
+        if (Inventory.Instance != null)
+        {
+            Inventory.Instance.OnWoodChanged -= UpdateQuestProgress;
+        }
         if (questText != null)
         {
             questText.text = string.Empty;
         }
+    }
+
+    private void UpdateQuestProgress(int currentWood)
+    {
+        if (ActiveQuest == null || questText == null)
+        {
+            return;
+        }
+
+        int required = ActiveQuest.woodRequired;
+        int clamped = Mathf.Min(currentWood, required);
+        questText.text = $"{clamped} / {required} wood";
     }
 }
