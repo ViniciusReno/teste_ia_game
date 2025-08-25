@@ -8,8 +8,8 @@ using UnityEngine;
 public class TreeSO : ScriptableObject
 {
     [Tooltip("Number of times the tree can be interacted with before it respawns.")]
-    public int attempts = 3;
+    public int attempts = 5;
 
     [Tooltip("Time in seconds before the tree respawns.")]
-    public float respawnTime = 5f;
+    public float respawnTime = 30f;
 }
